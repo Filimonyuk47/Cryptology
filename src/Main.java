@@ -1,9 +1,5 @@
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Scrambler scrambler = new Scrambler();
         Decoder decoder = new Decoder();
+        WriteAndReadFile writeAndReadFile = new WriteAndReadFile();
 
         System.out.println("Здесь вы можете воспользоваться шифратором и дешифратором!\n\n" +
                 "Если хотите воспользоваться шифратором введите: 1\n" +
@@ -30,12 +27,9 @@ public class Main {
 
                     System.out.println("Введите путь к текстовому файлу");
                     Path paths1 = Path.of(scanner.next());
-                    char[] line = Files.readString(paths1,
-                            StandardCharsets.UTF_8).toCharArray();
-                    //NoSuchFileException
 
                     System.out.println("Введите путь к файлу для записи зашифрованного текста\n" +
-                                       "Или его создания");
+                            "Или его создания");
                     String paths = scanner.next();
 
                     //C:\\Users\\dizaf\\OneDrive\\test.txt
@@ -49,18 +43,16 @@ public class Main {
                             "2 - левее");
                     int position = scanner.nextInt();
 
-                    System.out.println("Текст файла зашифрован\n" +
-                            "Результат:");
-                    System.out.println(scrambler.caesar(line, shift, position) + "\n\n" +
-                            "Результат также находиться в файле\n" +
-                            paths);
+                    try {
+                        System.out.println("Текст файла зашифрован\n" +
+                                "Результат:\n" +
+                                scrambler.caesar(writeAndReadFile.read(paths1), shift, position) +
+                                "\n\nРезультат также находиться в файле\n" + paths);
+                        Path path = Path.of(paths);
+                        writeAndReadFile.write(path, scrambler.caesar(writeAndReadFile.read(paths1), shift, position));
 
-                    Path path = Path.of(paths);
-                    if (Files.exists(path)) {
-                        Files.writeString(path,scrambler.caesar(line, shift, position), StandardOpenOption.WRITE);
-                    }else {
-                        Files.createFile(path);
-                        Files.writeString(path, scrambler.caesar(line, shift, position), StandardOpenOption.WRITE);
+                    } catch (Exception e) {
+                        System.out.println("Вы ввели некоректный путь к текстовому файлу");
                     }
                     scanner.close();
                     break;
@@ -74,13 +66,12 @@ public class Main {
                 int option = scanner.nextInt();
 
                 System.out.println("Введите путь к текстовому файлу");
-                Path paths2 = Paths.get(scanner.next());
-                char[] line = Files.readString(paths2,
-                        StandardCharsets.UTF_8).toCharArray();
+                Path paths2 = Path.of(scanner.next());
 
                 System.out.println("Введите путь к файлу для записи расшифрованного текста\n" +
                         "Или его создания");
                 String paths = scanner.next();
+
                 //C:\\Users\\dizaf\\OneDrive\\test.txt
                 //C:\\Users\\dizaf\\OneDrive\\test1.txt
 
@@ -100,36 +91,31 @@ public class Main {
                         position = 1;
                     }
 
-                    System.out.println("Текст файла расшифрован\n" +
-                            "Результат:");
-                    System.out.println(scrambler.caesar(line, shift, position) + "\n\n" +
-                            "Результат также находиться в файле\n" +
-                            paths);
+                    try {
+                        System.out.println("Текст файла расшифрован\n" +
+                                "Результат:\n" +
+                                scrambler.caesar(writeAndReadFile.read(paths2), shift, position) +
+                                "\n\nРезультат также находиться в файле\n" + paths);
+                        Path path = Path.of(paths);
+                        writeAndReadFile.write(path, scrambler.caesar(writeAndReadFile.read(paths2), shift, position));
 
-                    Path path = Path.of(paths);
-                    if (Files.exists(path)) {
-                        Files.writeString(path,scrambler.caesar(line, shift, position), StandardOpenOption.WRITE);
-                    }else {
-                        Files.createFile(path);
-                        Files.writeString(path, scrambler.caesar(line, shift, position), StandardOpenOption.WRITE);
+                    } catch (Exception e) {
+                        System.out.println("Вы ввели некоректный путь к текстовому файлу");
                     }
                     scanner.close();
                     break;
 
                 } else if (option == 2) {
-
-                    System.out.println("Текст файла расшифрован\n" +
-                            "Результат:");
-                    System.out.println(decoder.bruteForse(line) + "\n\n" +
-                            "Результат также находиться в файле\n" +
-                            paths);
-
-                    Path path = Path.of(paths);
-                    if (Files.exists(path)) {
-                        Files.writeString(path,decoder.bruteForse(line), StandardOpenOption.WRITE);
-                    }else {
-                        Files.createFile(path);
-                        Files.writeString(path, decoder.bruteForse(line), StandardOpenOption.WRITE);
+                    try {
+                        System.out.println("Текст файла расшифрован\n" +
+                                "Результат:\n" +
+                                decoder.bruteForse(writeAndReadFile.read(paths2)) +
+                                "\n\nРезультат также находиться в файле\n" +
+                                paths);
+                        Path path = Path.of(paths);
+                        writeAndReadFile.write(path, decoder.bruteForse(writeAndReadFile.read(paths2)));
+                    }catch (Exception e) {
+                        System.out.println("Вы ввели некоректный путь к текстовому файлу");
                     }
                     scanner.close();
                     break;
