@@ -17,14 +17,9 @@ public class Decoder {
     public String bruteForse(char[] line) {
         HashMap<Integer, Character> cipher = new HashMap<>();
         ArrayList<Integer> coincidence = new ArrayList<>();
-        //ArrayList<Integer> index = new ArrayList<>();
         int k = 0;
         while (k < ALPHABET.length) {
             for (int i = 0; i < line.length; i++) {
-//                if (line[i] >= 'А' && line[i] <= 'Я') {
-//                    index.add(i);
-//                    line[i] =  Character.toLowerCase(line[i]);
-//            }
                     for (int j = 0; j < ALPHABET.length; j++) {
                         if (line[i] == ALPHABET[j]) {
                             if (j + (1 + k) >= ALPHABET.length) {
@@ -35,20 +30,16 @@ public class Decoder {
                             break;
                         }
                     }
-                while (cipher.values().remove(null));
                 }
-//            for (Integer ind : index) {
-//                cipher.replace(ind, Character.toUpperCase(cipher.get(ind)));
-//            }
-            char[] space = new char[cipher.size()];
+            char[] values = new char[cipher.size()];
             int l = 0;
-            for (Map.Entry<Integer, Character> values : cipher.entrySet()) {
-                space[l++] = values.getValue();
+            for (Map.Entry<Integer, Character> val : cipher.entrySet()) {
+                values[l++] = val.getValue();
             }
-            String str = new String(space);
-            String[] fff = str.split(" ");
+            String str = new String(values);
+            String[] space = str.split(" ");
             int a = 0;
-            for (String s : fff) {
+            for (String s : space) {
                 for (String preposition : prepositions) {
                     if (s.equals(preposition)) {
                         a++;
@@ -56,7 +47,7 @@ public class Decoder {
                     }
                 }
             }
-            coincidence.add(k++, a);
+                coincidence.add(k++, a);
         }
         int max = Collections.max(coincidence);
         for (int i = 0; i < line.length; i++) {

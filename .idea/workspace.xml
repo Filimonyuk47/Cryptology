@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea779e71-d582-4cca-a5d3-84afc21f36af" name="Changes" comment="">
+    <list default="true" id="ea779e71-d582-4cca-a5d3-84afc21f36af" name="Changes" comment="Добавлены два класса и реализованы методы">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Decoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Decoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Scrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scrambler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +53,14 @@
       <option name="presentableId" value="Default" />
       <updated>1676907387107</updated>
     </task>
+    <task id="LOCAL-00001" summary="Добавлены два класса и реализованы методы">
+      <created>1677055891590</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1677055891590</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -66,5 +73,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавлены два класса и реализованы методы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены два класса и реализованы методы" />
   </component>
 </project>
