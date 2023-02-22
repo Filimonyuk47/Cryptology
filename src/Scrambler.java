@@ -56,6 +56,7 @@ public class Scrambler {
             value[f] = values.getValue();
             f++;
         }
+        int p = 0;
         return new String(value);
     }
 }
