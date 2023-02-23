@@ -17,4 +17,5 @@ public class WriteAndReadFile {
                     StandardCharsets.UTF_8).toCharArray();
             return line;
     }
+    int p = 0;
 }
